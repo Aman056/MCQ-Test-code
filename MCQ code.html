@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .Box {
+            border: none;
+            color: azure;
+            background: rgb(0, 0, 0);
+            margin: auto;
+            height: 70vh;
+            width: 60%;
+            margin-top: 15%;
+            box-shadow: 0px 0px 20px 5px rgb(46, 14, 14);
+        }
+
+        .Questions {
+            font-size: 20px;
+            border: 1px solid #fff;
+            background: rgb(255, 6, 6);
+            margin: 0 0 0 0;
+            height: 27vh;
+            width: 100%;
+            margin-top: 10%;
+            /* box-shadow: 0px 0px 20px 5px rgb(151, 69, 228); */
+        }
+
+        h5,
+        h6,
+        h4 {
+            margin: 10px;
+        }
+
+        .score {
+            border: 2px solid white;
+            width: 100%;
+            background: rgb(0, 0, 0);
+            color: black;
+            border: 4px solid red;
+            margin: 10px;
+            display: flex;
+            display: none;
+            z-index: 0;
+        }
+
+        .button-box {
+            width: 100%;
+            height: 34%;
+            border: none;
+        }
+
+        #submit {
+            margin: 40px 0 0 45%;
+            width: 100px;
+            height: 40px;
+            font-size: 20px;
+            background: rgb(255, 0, 0);
+            cursor: pointer;
+        }
+
+        #next {
+            font-size: 18px;
+            float: right;
+            height: 40px;
+            width: 100px;
+            background: rgb(255, 0, 0);
+            cursor: pointer;
+        }
+
+        #display {
+            border: 2px solid white;
+            display: flex;
+            background-color: #fff;
+            color: black;
+            height: 100px;
+            width: 25%;
+            margin: auto;
+            padding: 0px;
+            display: none;
+        }
+
+        table {
+            padding: 0px;
+            margin: 0px;
+            color: red;
+            background-color: black;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: -5px;
+            margin: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="Box">
+        <h2>
+            <center>MCQ Questions</center>
+        </h2>
+        <center>
+            <h3 id="number">1</h3>
+        </center>
+
+        <div class="Questions">
+            <h4 id="question">
+                <center>Click Next to start....</center>
+            </h4>
+            <form id="Option">
+                <h4 id="option1"></h4>
+                <h4 id="option2"></h4>
+                <h4 id="option3"></h4>
+                <h4 id="option4"></h4>
+            </form>
+        </div>
+
+        <div class="button-box">
+            <!-- <div id="btn1"> -->
+            <button class="button-box-bt" id="submit" onclick="ONsubmit()">Submit</button>
+            <button class="button" id="next" onclick="Sample()"> Next </button>
+            <!-- </div> -->
+            <div id="display">
+
+                <table class="table">
+                    <!-- <td><h5>Result</h5></td> -->
+                    <tr>
+                        <th>
+                            <h5>correct</h5>
+                        </th>
+                        <th>
+                            <h5>Total marks</h5>
+                        </th>
+                        <th>
+                            <h5>Status</h5>
+                        </th>
+                    </tr>
+                    <td>
+                        <h4 id="score"></h4>
+                    </td>
+                    <td>
+                        <h4 id="total"></h4>
+                    </td>
+                    <td>
+                        <h4 id="status"></h4>
+                    </td>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Questions------------------------------->
+        const Questions = [{
+            id: 1,
+            q: "What is capital of India?",
+            a: [{ text: "gandhinagar", isCorrect: false },
+            { text: "Surat", isCorrect: false },
+            { text: "Delhi", isCorrect: true },
+            { text: "mumbai", isCorrect: false }
+            ]
+
+        },
+        {
+            id: 2,
+            q: "What is the capital of Thailand?",
+            a: [{ text: "Lampang", isCorrect: false },
+            { text: "phuket", isCorrect: false },
+            { text: "Ayutthaya", isCorrect: false },
+            { text: "Bangkok", isCorrect: true }
+            ]
+
+        },
+        {
+            id: 3,
+            q: "What is the capital of Gujarat",
+            a: [{ text: "surat", isCorrect: false },
+            { text: "vadodara", isCorrect: false },
+            { text: "gandhinagar", isCorrect: true },
+            { text: "rajkot", isCorrect: false }
+            ]
+        },
+        {
+            id: 4,
+            q: "What is the capital of Manipur",
+            a: [{ text: "shillong", isCorrect: false },
+            { text: "Imphal", isCorrect: true },
+            { text: "kohima", isCorrect: false },
+            { text: "Guwahati", isCorrect: false }
+            ]
+        },
+
+        {
+            id: 5,
+            q: "What is the capital of Haryana",
+            a: [{ text: "shillong", isCorrect: false },
+            { text: "Punjab", isCorrect: true },
+            { text: "kohima", isCorrect: false },
+            { text: "Guwahati", isCorrect: false }
+            ]
+        },
+
+        {
+            id: 6,
+            q: "What is the capital of Ukrain",
+            a: [{ text: "shillong", isCorrect: false },
+            { text: "Imphal", isCorrect: false },
+            { text: "minsk", isCorrect: false },
+            { text: "Kyiva", isCorrect: true }
+            ]
+        },
+
+        {
+            id: 7,
+            q: "What is the capital of Kambodiya?",
+            a: [{ text: "shillong", isCorrect: false },
+            { text: "hanoi", isCorrect: false },
+            { text: "phnom penh", isCorrect: true },
+            { text: "Dili", isCorrect: false }
+            ]
+        },
+
+        {
+            id: 8,
+            q: "What is the capital of Belarus",
+            a: [{ text: "Baku", isCorrect: false },
+            { text: "Minsk", isCorrect: true },
+            { text: "Moroni", isCorrect: false },
+            { text: "Brussels", isCorrect: false }
+            ]
+        },
+
+        {
+            id: 9,
+            q: "What is the capital of Latvia",
+            a: [{ text: "Tripoli", isCorrect: false },
+            { text: "Riga", isCorrect: true },
+            { text: "Kabul", isCorrect: false },
+            { text: "Castries", isCorrect: false }
+            ]
+        },
+
+        {
+            id: 10,
+            q: "What is the currency name of Brazil",
+            a: [{ text: "Brazil rel", isCorrect: true },
+            { text: "Brazil rand", isCorrect: false },
+            { text: "Rupee", isCorrect: false },
+            { text: "Brazil peso", isCorrect: false }
+            ]
+        },
+
+
+        ]
+
+        function option() {
+            var o1 = Questions[index1].a[0].text;
+            var o2 = Questions[index1].a[1].text;
+            var o3 = Questions[index1].a[2].text;
+            var o4 = Questions[index1].a[3].text;
+
+            var opt = document.getElementById("option1").innerHTML = `1.<input type="checkbox" id="option1" name="check" onclick="onlyOne(this);checkans(0)" value="${o1}">  ${o1}`;
+            var opt = document.getElementById("option2").innerHTML = `2.<input type="checkbox" id="option2" name="check" onclick="onlyOne(this);checkans(1)" value="${o2}">  ${o2}`;
+            var opt = document.getElementById("option3").innerHTML = `3.<input type="checkbox" id="option3" name="check" onclick="onlyOne(this);checkans(2)" value="${o3}">  ${o3}`;
+            var opt = document.getElementById("option4").innerHTML = `4.<input type="checkbox" id="option4" name="check" onclick="onlyOne(this);checkans(3)" value="${o4}">  ${o4}`;
+        }
+
+        // Select only on check box Function-------------------------------------->
+        function onlyOne(checkbox) {
+            var checkboxes = document.getElementsByName('check')
+            checkboxes.forEach((item) => {
+                if (item !== checkbox) item.checked = false
+            })
+        }
+        // Next Question, function------------------------------> 
+        var index1 = 0
+        function Sample() {
+            option()
+            var ans = document.getElementById("question").innerHTML = `${index1 + 1}. ${Questions[index1].q}`;
+            const id = document.getElementById("number").innerHTML = `<center> ${index1 + 1} </center>`;
+            return index1++
+        }
+
+        //Answer check Function----------------------------------> 
+        var questionNum = 10
+        var Answer = 0
+        function checkans(number) {
+            var answ = Questions[index1 - 1].a[number].isCorrect
+            if (Questions[index1 - 1].a[number].isCorrect == true) {
+                console.log(true)
+                Answer++
+            }
+            else if (Questions[index1 - 1].a[number].isCorrect == false) {
+                console.log(false)
+            }
+        }
+        // On submit Show answer----------------------------------->
+        function ONsubmit() {
+            var show = document.getElementById("display").style.display = "block";
+            var total = document.getElementById("total").innerHTML = questionNum;
+            var score = document.getElementById("score").innerHTML = Answer;
+
+            if (questionNum / 2 > Answer) {
+                var cc = document.getElementById("status").innerHTML = "Fail";
+            }
+            else {
+                document.getElementById("status").innerHTML = "Pass";
+            }
+        }
+
+    </script>
+</body>
+
+</html>
